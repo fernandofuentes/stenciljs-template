@@ -1,0 +1,74 @@
+import { registerInstance as __stencil_registerInstance, getElement as __stencil_getElement } from "@stencil/core";
+import { h } from "@stencil/core";
+import SiteProviderConsumer from '../../global/site-provider-consumer';
+export const AppRoot = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.elements = [
+            'site-header',
+            'site-menu',
+            'app-burger',
+            'main'
+        ];
+        this.isLeftSidebarIn = false;
+        this.setHistory = ({ history }) => {
+            if (!this.history) {
+                this.history = history;
+                this.history.listen((location) => {
+                    // Google Analytics
+                    window.gtag('config', 'UA-44023830-34', { 'page_path': location.pathname + location.search });
+                    // Hubspot
+                    window._hsq.push(['setPath', location.pathname + location.search]);
+                    window._hsq.push(['trackPageView']);
+                });
+            }
+        };
+        this.toggleLeftSidebar = () => {
+            if (window.innerWidth >= 768) {
+                return;
+            }
+            const elements = this.elements
+                .map(el => this.el.querySelector(el))
+                .filter(el => !!el);
+            if (this.isLeftSidebarIn) {
+                this.isLeftSidebarIn = false;
+                document.body.classList.remove('no-scroll');
+                elements.forEach(el => {
+                    el.classList.remove('left-sidebar-in');
+                    el.classList.add('left-sidebar-out');
+                });
+            }
+            else {
+                this.isLeftSidebarIn = true;
+                document.body.classList.add('no-scroll');
+                elements.forEach(el => {
+                    el.classList.add('left-sidebar-in');
+                    el.classList.remove('left-sidebar-out');
+                });
+            }
+        };
+    }
+    handleResize() {
+        requestAnimationFrame(() => {
+            if (window.innerWidth > 768 && this.isLeftSidebarIn) {
+                this.isLeftSidebarIn = false;
+                document.body.classList.remove('no-scroll');
+                this.elements.forEach((el) => {
+                    this.el.querySelector(el).classList.remove('left-sidebar-in');
+                });
+            }
+        });
+    }
+    componentDidLoad() {
+        this.isLeftSidebarIn = false;
+    }
+    render() {
+        const siteState = {
+            isLeftSidebarIn: this.isLeftSidebarIn,
+            toggleLeftSidebar: this.toggleLeftSidebar
+        };
+        return (h(SiteProviderConsumer.Provider, { state: siteState }, h("site-header", null), h("main", null, h("stencil-router", { scrollTopOffset: 0 }, h("stencil-route", { style: { display: 'none' }, routeRender: this.setHistory }), h("stencil-route-switch", null, h("stencil-route", { url: "/", component: "landing-page", exact: true }), h("stencil-route", { url: "/docs/:pageName", routeRender: ({ match }) => (h("doc-component", { page: match.url })) }), h("stencil-route", { url: "/blog", component: "blog-list", exact: true }), h("stencil-route", { url: "/blog/:pageName", routeRender: ({ match }) => (h("blog-component", { page: match.url })) }), h("stencil-route", { url: "/pwa", component: "pwas-page" }), h("stencil-route", { url: "/resources", component: "resources-page" }), h("stencil-route", { url: "/design-systems", component: "ds-page" }), h("stencil-route", { component: 'notfound-page' }))), h("footer", null, h("div", { class: "container" }, h("div", { class: "footer-col" }, h("app-icon", { name: "logo" }), h("p", null, "\u00A9 2019 StencilJS.  Released under MIT License"), h("ul", { class: "external-links list--unstyled" }, h("li", null, h("a", { rel: "noopener", class: "link--external", target: "_blank", href: "https://twitter.com/stenciljs" }, h("app-icon", { name: "twitter" }))), h("li", null, h("a", { rel: "noopener", class: "link--external", target: "_blank", href: "https://stencil-worldwide.herokuapp.com" }, h("app-icon", { name: "slack" }))), h("li", null, h("a", { rel: "noopener", class: "link--external", target: "_blank", href: "https://github.com/ionic-team/stencil" }, h("app-icon", { name: "github" }))))))))));
+    }
+    get el() { return __stencil_getElement(this); }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-root"; }
+};

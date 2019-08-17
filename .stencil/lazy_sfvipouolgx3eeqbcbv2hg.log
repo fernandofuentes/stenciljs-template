@@ -1,0 +1,15 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+export const ContributorList = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        const contributors = this.contributors;
+        if (!contributors || contributors.length === 0) {
+            return null;
+        }
+        return (h("section", null, h("h5", null, "Contributors"), h("div", null, h("ul", null, contributors.map(contributor => (h("li", null, h("a", { href: `https://github.com/${contributor}`, target: "_blank" }, h("span", { class: "img-wrapper" }, h("img", { src: `https://github.com/${contributor}.png?size=90`, loading: "lazy", title: `Contributor ${contributor}`, importance: "low" }))))))))));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:contributor-list"; }
+};

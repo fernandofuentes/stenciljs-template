@@ -1,0 +1,21 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import SiteProviderConsumer from '../../global/site-provider-consumer';
+export const SiteMenu = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.siteStructureList = [];
+        this.toggleParent = (parentItem) => {
+            return (e) => {
+                e.preventDefault();
+                this.selectedParent = parentItem;
+            };
+        };
+    }
+    render() {
+        return (h("div", { class: "sticky" }, h(SiteProviderConsumer.Consumer, null, ({ toggleLeftSidebar }) => (h("div", null, h("ul", { class: 'menu-list' }, this.siteStructureList.map((item) => (h("li", null, h("a", { href: item.children[0].url || '#', onClick: this.toggleParent(item) }, h("span", { class: "section-label" }, item.text)), h("ul", { class: { 'collapsed': item !== this.selectedParent } }, item.children.map((childItem) => (h("li", null, (childItem.url) ?
+            h("stencil-route-link", { url: childItem.url, onClick: toggleLeftSidebar }, childItem.text) :
+            h("a", { rel: "noopener", class: "link--external", target: "_blank", href: childItem.filePath }, childItem.text))))))))))))));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:site-menu"; }
+};

@@ -1,0 +1,18 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+export const LowerContentNav = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return [
+            (this.prev != null ?
+                h("stencil-route-link", { url: this.prev.url, anchorClass: "pull-left btn btn--secondary" }, "Back") :
+                null),
+            (this.next != null ?
+                h("stencil-route-link", { url: this.next.url, anchorClass: "pull-right btn btn--primary" }, "Next") :
+                null)
+        ];
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:lower-content-nav"; }
+};

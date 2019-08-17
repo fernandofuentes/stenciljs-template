@@ -1,0 +1,11 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+export const DemoCard = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", null, h("div", { class: "demo-card__image" }, h("a", { target: "_blank", rel: "noopener", href: this.demoUrl }, h("img", { src: `${this.imgPath}.jpg`, srcSet: `${this.imgPath}.jpg 1x, ${this.imgPath}@2x.jpg 2x`, loading: "lazy" }))), h("h3", null, this.name), h("p", null, this.description), h("p", null, h("a", { target: "_blank", rel: "noopener", href: this.demoUrl, class: "text-link text-link--primary" }, "Demo"), "\u00A0\u00A0", h("a", { target: "_blank", rel: "noopener", href: this.sourceUrl, class: "text-link text-link--secondary" }, "Source"))));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:demo-card"; }
+};

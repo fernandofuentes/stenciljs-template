@@ -1,0 +1,10 @@
+lower-content-nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+lower-content-nav > stencil-route-link {
+    display: inline-block;
+}

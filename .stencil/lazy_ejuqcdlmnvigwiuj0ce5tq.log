@@ -1,0 +1,14 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import blogStructure from '../../assets/blog/list.json';
+export const BlogIndex = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("div", { class: "container" }, h("div", { class: "blog-index" }, blogStructure.map(post => {
+            return (h("div", { class: "blog-item" }, h("stencil-route-link", { url: post.url, class: "post-title" }, h("h1", null, post.title)), h("span", { class: "post-meta" }, h("a", { href: `http://twitter.com/${post.twitter}` }, h("img", { alt: `Author: ${post.author}`, class: "post-author-image", src: `/assets/img/blog/authors/${post.twitter}.jpg` })), h("a", { class: "post-author-name", href: `http://twitter.com/${post.twitter}` }, post.author), h("span", { class: "post-date" }, post.date)), h("p", null, post.description), h("stencil-route-link", { url: post.url, class: "read-more" }, "Read more")));
+        }))));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:blog-list"; }
+};

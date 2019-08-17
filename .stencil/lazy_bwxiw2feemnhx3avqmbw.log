@@ -1,0 +1,15 @@
+import { registerInstance as __stencil_registerInstance, getElement as __stencil_getElement } from "@stencil/core";
+import { h } from "@stencil/core";
+import SiteProviderConsumer from '../../global/site-provider-consumer';
+export const AppBurger = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.toggleLeftSidebar = () => { };
+    }
+    render() {
+        return (h("div", { class: "burger", onClick: this.toggleLeftSidebar }, h("app-icon", { name: "menu" }), h("app-icon", { name: "close" })));
+    }
+    get el() { return __stencil_getElement(this); }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-burger"; }
+};
+SiteProviderConsumer.injectProps(AppBurger, ['toggleLeftSidebar']);

@@ -1,0 +1,11 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+export const AppIcon = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("svg", { class: `icon icon-${this.name}`, width: "96", height: "23" }, h("use", { xlinkHref: `#icon-${this.name}` })));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:app-icon"; }
+};

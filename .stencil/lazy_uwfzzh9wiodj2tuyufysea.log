@@ -1,0 +1,11 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+export const SiteTopBar = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    render() {
+        return (h("a", { href: "https://blog.ionicframework.com/build-your-next-design-system-with-web-components/", target: "_blank", rel: "noopener" }, "On the blog: ", h("u", null, "Build your next Design System with Web Components")));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:site-top-bar"; }
+};
